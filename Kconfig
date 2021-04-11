@@ -1,0 +1,384 @@
+# General configuration options
+
+mainmenu "tbeamLoRa configuration"
+
+menu "General options"
+
+    config SERIAL_BAUD
+        int "Baud rate"
+        help
+          Serial monitor baud rate
+        default 115200
+
+    config SEND_INTERVAL
+        int "Time interval for sending data (ms)"
+        help
+          Sleep for these many ms
+        default 300000
+
+    config LOGO_DELAY
+        int "Initial logo delay (ms)"
+        help
+          Time to show logo on first boot (in ms)
+        default 5000
+
+    config BUTTON_PIN
+        int "Pin number of action button"
+        help
+          Do not modify, board-specific
+        default 38
+
+    choice LED_MODE
+    	bool "Led blink"
+    	help
+    	  Set blue led mode
+
+        config LED_OFF
+        	bool "Turn off the LED"
+
+        config LED_BLINK
+     	    bool "Blink LED, 1s period"
+
+    endchoice
+
+    config I2C_SDA
+        int "Pin number of I2C's SDA"
+        help
+          Do not modify, board-specific
+        default 21
+
+    config I2C_SCL
+        int "Pin number of I2C's SCL"
+        help
+          Do not modify, board-specific
+        default 22
+
+    config AXP192_ADDR
+        hex "Address of AXP192"
+        help
+          Do not modify, board-specific
+        default 0x34
+
+    config SPS30_ADDR
+        hex "Address of SPS30"
+        help
+          I2C addr of the SPS30, notouchy
+        default 0x69
+
+    choice BME680_LIB
+    	bool "BME680 library"
+    	help
+    	  Set the library to use for the BME680 sensor
+
+        config BME680_ADAFRUIT
+        	bool "Adafruit library"
+
+        config BME680_BOSCH
+         	bool "Bosch BSEC library"
+
+        endchoice
+
+    config HAS_SEN0170
+    	bool "Want SEN0170"
+    	help
+    	  Choose if you want the SEN0170 wind sensor
+    	default True
+
+    config HAS_LPPYRA03AV
+    	bool "Want LPPYRA03AV"
+    	help
+    	  Choose if you want the LPPYRA03AV pyranometer
+        default True
+
+endmenu
+
+
+menu "AXP192 PMU options"
+
+    config DCDC1_DEVICE
+        string "DCDC1 device"
+        help
+          Name of the device connected to the first switch-mode DCDC converter of the AXP192
+        default "BME680"
+
+    config PMU_IRQ
+        int "PMU IRQ pin"
+        help
+          Do not modify, board-specific
+        default 35
+
+endmenu
+
+menu "CayenneLPP configuration"
+
+    config MAX_PAYLOAD
+        int "Max payload (bytes)"
+        default 200
+
+endmenu
+
+
+menu "Channels configuration"
+
+    menu "BME680 channels"
+
+        config CHAN_BME680_TEMP
+            int "Temperature"
+            default 1
+
+        config CHAN_BME680_AVGTEMP
+            int "Average temperature"
+            default 2
+
+        config CHAN_BME680_PRESS
+            int "Pressure"
+            default 3
+
+        config CHAN_BME680_GAS
+            int "Gas resistance"
+            default 4
+
+        config CHAN_BME680_HUM
+            int "Humidity"
+            default 5
+
+        config CHAN_BME680_ALT
+            int "Estimated altitude"
+            default 6
+
+    endmenu
+
+
+    menu "SEN0170 channels"
+
+        config CHAN_SEN0170_WIND
+            int "Wind speed"
+            default 7
+
+    endmenu
+
+
+    menu "LPPYRA03AV channels"
+
+        config CHAN_LPPYRA03AV_IRRAD
+            int "Irradiance"
+            default 8
+
+    endmenu
+
+
+    menu "SPS30 channels"
+
+        config CHAN_SPS30_PM1Ugm3
+            int "PM1Ugm3 channel"
+            default 9
+
+        config CHAN_SPS30_PM2Ugm3
+            int "PM2Ugm3 channel"
+            default 10
+
+        config CHAN_SPS30_PM4Ugm3
+            int "PM4Ugm3 channel"
+            default 11
+
+        config CHAN_SPS30_PM10Ugm3
+            int "PM10Ugm3 channel"
+            default 12
+
+        config CHAN_SPS30_PM0Particlem3
+            int "PM0Particlem3 channel"
+            default 13
+
+        config CHAN_SPS30_PM1Particlem3
+            int "PM1Particlem3 channel"
+            default 14
+
+        config CHAN_SPS30_PM2Particlem3
+            int "PM2Particlem3 channel"
+            default 15
+
+        config CHAN_SPS30_PM4Particlem3
+            int "PM4Particlem3 channel"
+            default 16
+
+        config CHAN_SPS30_PM10Particlem3
+            int "PM10Particlem3 channel"
+            default 17
+
+        config CHAN_SPS30_PMAverageUm
+            int "PMAverageUm channel"
+            default 18
+
+    endmenu
+
+    menu "GPS channels"
+
+        config CHAN_GPS
+            int "GPS"
+            default 19
+
+    endmenu
+
+endmenu
+
+menu "GPS configuration"
+
+    config GPS_SERIAL_NUM
+        int "GPS serial port number"
+        help
+          Number of GPS serial port (e.g. Serial1 ecc)
+        default 1
+
+    config GPS_BAUDRATE
+        int "Baud rate of GPS serial port"
+        help
+          Baud rate of GPS serial port
+        default 9600
+
+    config GPS_RX_PIN
+        int "GPS serial RX pin"
+        help
+          Don't edit, board specific
+        default 34
+
+    config GPS_TX_PIN
+        int "GPS serial TX pin"
+        help
+          Don't edit, board specific
+        default 12
+
+    config GPS_WAIT_FOR_LOCK
+        int "Wait for GPS lock (ms)"
+        help
+          Milliseconds to wait for GPS lock
+        default 10000000
+
+endmenu
+
+menu "LoRa configuration"
+
+    menu "LoRa module SPI configuration"
+
+        config SCK_GPIO
+            int "LoRa SPI SCK pin"
+            help
+              Don't edit, board specific
+            default 5
+
+        config MISO_GPIO
+            int "LoRa SPI MISO pin"
+            help
+              Don't edit, board specific
+            default 19
+
+        config MOSI_GPIO
+            int "LoRa SPI MOSI pin"
+            help
+              Don't edit, board specific
+            default 27
+
+        config NSS_GPIO
+            int "LoRa SPI NSS pin"
+            help
+              Don't edit, board specific
+            default 18
+
+    endmenu
+
+    config RESET_GPIO
+        int "LoRa module reset pin"
+        help
+          Don't edit, board specific
+        default 14
+
+    config DIO0_GPIO
+        int "LoRa DIO0 pin"
+        help
+          Don't edit, board specific
+        default 26
+
+    config DIO1_GPIO
+        int "LoRa DIO1 pin"
+        help
+          Don't edit, board specific
+        default 33
+
+    config DIO2_GPIO
+        int "LoRa DIO2 pin"
+        help
+          Don't edit, board specific
+        default 32
+
+    config LORAWAN_PORT
+        int "LoRaWAN port"
+        help
+          Port msgs will be sent to
+        default 10
+
+    config LORA_SPREADING_FACTOR
+        int "LoRa spreading factor"
+        help
+          LoRa spreading factor
+        default 5
+
+    config LORA_TX_POW
+        int "LoRa transmit power"
+        help
+          "LoRa transmit power"
+        default 14
+
+   config LORA_ADR
+       bool "Enable Adaptive Data Rate (ADR)"
+       default True
+
+endmenu
+
+
+menu "SPS30 sensor configuration"
+
+    config SPS30_CLEAN_NOW
+        bool "Fan cleaning at each measurement"
+        help
+          Fan cleaning at each measurement
+        default True
+
+endmenu
+
+
+menu "SEN0170 sensor configuration"
+
+    config SEN0170_PIN
+        int "ADC pin to the SEN0170"
+        default 23
+
+endmenu
+
+
+menu "LPPYRA03AV pyranometer configuration"
+
+    config LPPYRA03AV_PIN
+        int "ADC pin to the LPPYRA03AV"
+        default 4
+
+endmenu
+
+
+menu "BME680 sensor configuration"
+
+    config BME680_TEMP_MV_AVG
+        int "Depth of the moving average on temp"
+        default 5
+
+    config SEALEVELPRESSURE_HPA
+        int "Pressure at sea level (hPa)"
+        default 1013
+
+    config BME680_ADDR1
+        hex "I2C primary address of BME680"
+        default 0x76
+
+    config BME680_ADDR2
+        hex "I2C secondary address of BME680"
+        default 0x77
+
+endmenu
