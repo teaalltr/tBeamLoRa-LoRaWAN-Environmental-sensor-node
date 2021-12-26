@@ -1,6 +1,6 @@
 ## tBeamLoRa
 
-This is the sensor node part of a LoRaWAN network to save environmental data to a remote database. The software reads data from several sensors, namely the SPS30 particulate matter sensor, the SEN0170 anamometer, the BME680 temp, press etc module and the LPPYRA03AV pyranometer. A custom shield was also developed: the schematics and the KiCad project files are available [here](https://github.com/Piruzzolo/ttgo-tbeam-sensor-shield).
+This is the sensor node part of a LoRaWAN network to save environmental data to a remote database. The software reads data from several sensors, namely the SPS30 particulate matter sensor, the SEN0170 anemometer, the BME680 temp, press etc module and the LPPYRA03AV pyranometer. A custom shield was also developed: schematics and the KiCad project files are available [here](https://github.com/Piruzzolo/ttgo-tbeam-sensor-shield).
 
 
 ## Setup
