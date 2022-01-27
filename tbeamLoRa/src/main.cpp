@@ -177,7 +177,15 @@ void sleep()
             (millis() < CONFIG_SEND_INTERVAL) ?
                                                 CONFIG_SEND_INTERVAL - millis()
                                               : CONFIG_SEND_INTERVAL;
-
+        //
+        // delete the button object from the heap to avoid leak
+        //
+        delete button;
+        
+        
+        //
+        // do the deepsleep
+        //
         deepsleep::do_deepsleep(sleep_for, wantGPS);
 }
 
